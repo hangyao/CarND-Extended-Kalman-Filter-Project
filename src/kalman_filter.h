@@ -8,6 +8,9 @@ public:
   // state vector
   Eigen::VectorXd x_;
 
+  // predicted measurement vector
+  Eigen::VectorXd z_pred_;
+
   // state covariance matrix
   Eigen::MatrixXd P_;
 
@@ -43,7 +46,7 @@ public:
    * @param Q_in Process covariance matrix
    */
   void Init(Eigen::VectorXd &x_in, Eigen::MatrixXd &P_in, Eigen::MatrixXd &F_in,
-      Eigen::MatrixXd &H_in, Eigen::MatrixXd &R_in, Eigen::MatrixXd &Q_in);
+      Eigen::MatrixXd &H_in, Eigen::MatrixXd &R_in);
 
   /**
    * Prediction Predicts the state and the state covariance
@@ -51,12 +54,6 @@ public:
    * @param delta_T Time between k and k+1 in s
    */
   void Predict();
-
-  /**
-   * Updates the state by using standard Kalman Filter equations
-   * @param z The measurement at k+1
-   */
-  void Update(const Eigen::VectorXd &z);
 
   /**
    * Updates the state by using Extended Kalman Filter equations
